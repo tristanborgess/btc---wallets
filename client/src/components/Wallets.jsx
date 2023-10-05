@@ -12,7 +12,6 @@ const [activeCategory, setActiveCategory] = useState('On-chain');
 
 const [displayAllWallets, setDisplayAllWallets] = useState(true);
 const [searchedWallets, setSearchedWallets] = useState([]);
-
 const [shownColumns, setShownColumns] = useState(['Name']);
 
 //For the wallet search feature. It checks if the wallet is already displayed and adds the searched wallet to the displayWallets array
