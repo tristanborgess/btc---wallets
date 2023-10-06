@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import Tabs from './Tabs';
 import SearchWallets from './SearchWallets';
 import WalletFilter from './WalletFilter';
+import data from '/data.json';
 
 const Wallets = () => {
 const [wallets, setWallets] = useState([]);
+const [activeCategory, setActiveCategory] = useState('On-chain');
+const [shownColumns, setShownColumns] = useState(['Name']);
+
 const [loading, setLoading] = useState(false);
 const features = wallets.length > 0 ? Object.keys(wallets[0]).filter(feature => feature !== '_id' && feature !== 'Category') : [];
-const [activeCategory, setActiveCategory] = useState('On-chain');
 
 const [displayAllWallets, setDisplayAllWallets] = useState(true);
 const [searchedWallets, setSearchedWallets] = useState([]);
-const [shownColumns, setShownColumns] = useState(['Name']);
+
 
 //For the wallet search feature. It checks if the wallet is already displayed and adds the searched wallet to the displayWallets array
 const handleSearch = (wallet) => {
@@ -38,20 +41,13 @@ const handleColumnToggle = (newShownColumns) => {
 };
 
 useEffect(() => {
-    setLoading(true);
-    fetch(`http://localhost:3000/wallets/${activeCategory}`)
-        .then(response => response.json())
-        .then(data => {
-            setWallets(data.data);
-            const newFeatures = data.data.length > 0 ? Object.keys(data.data[0]).filter(feature => feature !== '_id' && feature !== 'Category') : [];
-            const columnsToAdd = newFeatures.filter(feature => !shownColumns.includes(feature));
-            setShownColumns(prev => ['Name', ...columnsToAdd.slice(0, 6)]);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.error(err);
-            setLoading(false);
-        });
+    const filteredWallets = data.filter(wallet => wallet.Category === activeCategory);
+        setWallets(filteredWallets);
+
+    if (filteredWallets.length > 0) {
+        const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category');
+        setShownColumns(['Name', ...walletFeatures.slice(1, 8)]);
+    }
 }, [activeCategory]);
 
 return (
