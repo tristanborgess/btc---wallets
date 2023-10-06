@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import React from 'react';
 import GlobalStyles from './GlobalStyles';
 import Navbar from './components/Navbar';
 import Wallets from './components/Wallets';
