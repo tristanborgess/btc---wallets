@@ -19,7 +19,6 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         font-size: 100%;
         vertical-align: baseline;
-        box-sizing: border-box;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure,
