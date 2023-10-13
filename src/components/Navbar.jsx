@@ -29,7 +29,7 @@ const NavContainer = styled.div`
     width: 100%;
     align-items: center;
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(10px);
 `;
 
 const StyledLink = styled(Link)`

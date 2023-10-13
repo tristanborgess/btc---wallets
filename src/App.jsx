@@ -4,6 +4,7 @@ import GlobalStyles from './GlobalStyles';
 import Navbar from './components/Navbar';
 import Wallets from './components/Wallets';
 import Footer from './components/Footer';
+import background from '../src/assets/walletsBackground.png'
 
 
 function App() {
