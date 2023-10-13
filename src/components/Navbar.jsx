@@ -8,11 +8,22 @@ const Navbar = () => {
 
     useEffect(() => {
         // Fetch the current Bitcoin block height
-        fetch("https://mempool.space/api/blocks/tip/height")
-            .then(response => response.json())
-            .then(data => setBlockHeight(data))
-            .catch(err => console.error(err));
+        fetch("/api/blocks/tip/height")
+            .then(response => response.text())  // Convert response to text
+            .then(text => {
+                console.log("Raw response:", text);  // Log the raw text response
+                
+                // Try to parse the text as JSON and set the block height
+                try {
+                    const data = JSON.parse(text);
+                    setBlockHeight(data);
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
+            })
+            .catch(err => console.error("Error fetching data:", err));
     }, []);
+    
 
     return (
         <NavContainer>
