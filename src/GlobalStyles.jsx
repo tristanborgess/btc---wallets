@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import bgImage from '../src/assets/walletsBackground.png'
+
 
 const GlobalStyles = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -33,6 +35,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: "VT323";
         min-height: 100vh;
         max-width: 100vw;
+        background-image: url(${bgImage});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     ol, ul {
         list-style: none;
