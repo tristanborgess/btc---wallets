@@ -33,8 +33,8 @@ const GlobalStyles = createGlobalStyle`
     body {
         line-height: 1;
         font-family: "VT323";
-        min-height: 100vh;
-        max-width: 100vw;
+        min-height: 100%;
+        max-width: 100%;
         background-image: url(${bgImage});
         background-size: cover;
         background-position: center;
