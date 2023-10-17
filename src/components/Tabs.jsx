@@ -1,36 +1,56 @@
 import React from 'react';
 import styled from 'styled-components';
-import Select from 'react-select';
 
 const Tabs = ({ activeCategory, onCategoryChange }) => {
-    const options = [
-        { value: 'On-chain', label: 'On-chain' },
-        { value: 'Lightning', label: 'Lightning' },
-        { value: 'Hardware', label: 'Hardware' }
-    ];
+    const categories = ['On-chain', 'Lightning', 'Hardware'];
 
-    const handleChange = (selectedOption) => {
-        if (selectedOption) {
-            onCategoryChange(selectedOption.value);
-        }
-    };
-
-return (
-<DropdownContainer>
-    <Select
-        value={options.find(option => option.value === activeCategory)}
-        onChange={handleChange}
-        options={options}
-        className="basic-single"
-        classNamePrefix="select"
-    />
-</DropdownContainer>
-);
+    return (
+        <TabsContainer>
+            {categories.map((category, index) => (
+                <React.Fragment key={category}>
+                    <Tab 
+                        isActive={activeCategory === category} 
+                        onClick={() => onCategoryChange(category)}
+                    >
+                        {category}
+                        {activeCategory === category && <ActiveIndicator />}
+                    </Tab>
+                    {index < categories.length - 1 && <Separator>|</Separator>}
+                </React.Fragment>
+            ))}
+        </TabsContainer>
+    );
 };
 
-const DropdownContainer = styled.div`
-display: flex;
-margin-bottom: 20px;
+const TabsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+`;
+
+const Tab = styled.div`
+    position: relative; 
+    cursor: pointer;
+    padding: 10px;
+    font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
+    color: ${({ isActive }) => (isActive ? '#fff' : '#aaa')};
+
+    &:hover {
+        color: #fff;
+    }
+`;
+
+const ActiveIndicator = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;  
+    background-color: #fff; 
+`;
+
+const Separator = styled.span`
+    color: #fff;
 `;
 
 export default Tabs;
