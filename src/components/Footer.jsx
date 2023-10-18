@@ -24,6 +24,9 @@ const Footer = () => {
                     <CreditLink href="https://twitter.com/TristanBorgess" target="_blank" rel="noopener noreferrer">
                         Twitter
                     </CreditLink>
+                    <CreditLink href="https://twitter.com/TristanBorgess" target="_blank" rel="noopener noreferrer">
+                        Donate
+                    </CreditLink>
                 </LinksContainer>
             </CreditsContainer>
         </FooterContainer>
@@ -40,6 +43,7 @@ const FooterContainer = styled.div`
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
     backdrop-filter: blur(10px);
     margin-top: 5vw;
+    font-family: "Public Pixel";
 `;
 
 const StyledLink = styled(Link)`
@@ -81,7 +85,7 @@ const CreditsContainer = styled.p`
     flex-direction: column;
     align-items: center;
     color: rgba(255, 255, 255, 0.80);
-    font-size: 0.9rem;
+    font-size: 0.5rem;
     font-style: normal;
     font-weight: 100;
     line-height: normal;
@@ -92,8 +96,8 @@ const CreditsContainer = styled.p`
 const LinksContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    margin-top: 5px;  
+    gap: 25px;
+    margin-top: 15px;  
 `;
 
 const CreditLink = styled.a`

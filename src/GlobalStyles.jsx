@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import bgImage from '../src/assets/walletsBackground.png'
 
-
 const GlobalStyles = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -32,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         line-height: 1;
-        font-family: "VT323";
+        font-family: "Bell Centennial Std";
         color: #F5F5F5;
         min-height: 100%;
         max-width: 100%;
