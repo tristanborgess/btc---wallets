@@ -25,7 +25,6 @@ const Tabs = ({ activeCategory, onCategoryChange }) => {
 const TabsContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
 `;
 
 const Tab = styled.div`

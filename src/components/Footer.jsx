@@ -39,6 +39,7 @@ const FooterContainer = styled.div`
     align-items: center;
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
     backdrop-filter: blur(10px);
+    margin-top: 5vw;
 `;
 
 const StyledLink = styled(Link)`
