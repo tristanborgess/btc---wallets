@@ -1,41 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Select from 'react-select';
 
 const WalletFilter = ({ columns, shownColumns, onColumnToggle }) => {
-    const filteredColumns = columns.filter(column => column !== 'Name');
+    const [isOpen, setIsOpen] = useState(false);
 
-    const options = filteredColumns.map(column => ({
-        value: column,
-        label: column
-    }));
+    const availableColumns = columns.filter(column => column !== 'Name');
+    const toggleColumn = (column) => {
+        const newColumns = shownColumns.includes(column)
+            ? shownColumns.filter(col => col !== column)
+            : [...shownColumns, column];
 
-    const handleColumnChange = (selected) => {
-        const newShownColumns = ['Name', ...selected.map(item => item.value)];
-        onColumnToggle(newShownColumns);
+        onColumnToggle(newColumns);
     };
 
     return (
-        <DropdownContainer>
-            <Select
-                isMulti
-                name="columns"
-                options={options}
-                value={shownColumns.filter(column => column !== 'Name').map(column => ({ value: column, label: column }))}
-                onChange={handleColumnChange}
-                className="basic-multi-select"
-                classNamePrefix="select"
-            />
-        </DropdownContainer>
+        <>
+            <FilterButton onClick={() => setIsOpen(!isOpen)}>+</FilterButton>
+            {isOpen && (
+                <Dropdown>
+                    <CheckboxContainer>
+                        <input type="checkbox" id="selectAll" 
+                            checked={availableColumns.length === shownColumns.length - 1} 
+                            onChange={() => onColumnToggle(availableColumns.length === shownColumns.length - 1 ? ['Name'] : ['Name', ...availableColumns])} 
+                        />
+                        <label htmlFor="selectAll">Select All</label>
+                    </CheckboxContainer>
+                    {availableColumns.map(column => (
+                        <CheckboxContainer key={column}>
+                            <input type="checkbox" id={column} 
+                                checked={shownColumns.includes(column)} 
+                                onChange={() => toggleColumn(column)} 
+                            />
+                            <label htmlFor={column}>{column}</label>
+                        </CheckboxContainer>
+                    ))}
+                </Dropdown>
+            )}
+        </>
     );
-}
+};
 
+const FilterButton = styled.button`
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;  // Adjust the color to fit your design
+`;
 
-const DropdownContainer = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+const Dropdown = styled.div`
+    position: absolute;
+    margin-top: 20px;
+    right: 0;
+    background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
+    border: 1px solid black;
+`;
+
+const CheckboxContainer = styled.div`
+    margin: 5px;
 `;
 
 export default WalletFilter;

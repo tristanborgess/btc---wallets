@@ -57,7 +57,6 @@ const SearchWallets = ({ onSearch, activeCategory, wallets, hasSearched, onClear
 const Container = styled.div`
     position: relative;
     width: fit-content;
-    margin: 20px;
 `;
 
 const Search = styled.div`
