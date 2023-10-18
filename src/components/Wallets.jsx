@@ -32,13 +32,31 @@ const Wallets = () => {
         setShownColumns(newShownColumns);
     };
 
+    const mapYesNoToSymbols = (text) => {
+        if (text === "Yes") {
+          return (
+            <StyledSymbol className="yes-symbol" role="img" aria-label="Yes">
+              ✓
+            </StyledSymbol>
+          );
+        } else if (text === "No") {
+          return (
+            <StyledSymbol className="no-symbol" role="img" aria-label="No">
+              ✗
+            </StyledSymbol>
+          );
+        }
+        // Return the original text if it's neither "Yes" nor "No"
+        return text;
+      };
+
     useEffect(() => {
         const filteredWallets = data.filter(wallet => wallet.Category === activeCategory);
         setWallets(filteredWallets);
 
         if (filteredWallets.length > 0) {
             const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category');
-            setShownColumns(['Name', ...walletFeatures.slice(1, 8)]);
+            setShownColumns(['Name', ...walletFeatures.slice(1, 7)]);
         }
     }, [activeCategory]);
 
@@ -65,7 +83,9 @@ const Wallets = () => {
                         <thead>
                             <tr>
                                 {shownColumns.map(feature => (
-                                    <StyledTableHeader key={feature}>{feature}</StyledTableHeader>
+                                    <StyledTableHeader key={feature}>
+                                        {feature}
+                                    </StyledTableHeader>
                                 ))}
                                 <StyledTableHeader>
                                     <WalletFilter 
@@ -80,11 +100,13 @@ const Wallets = () => {
                             {displayWallets.map(wallet => (
                                 <tr key={wallet._id}>
                                     {shownColumns.map(feature => (
-                                        <StyledTableCell key={feature}>
-                                            {typeof wallet[feature] === "object" ? JSON.stringify(wallet[feature]) : wallet[feature]}
+                                        <StyledTableCell 
+                                            key={feature}
+                                            className={feature === 'Name' ? 'name-column-cell' : ''}
+                                        >
+                                                {mapYesNoToSymbols(wallet[feature])}
                                         </StyledTableCell>
                                     ))}
-                                    <StyledTableCell></StyledTableCell> {/* Added this to align with the "+" column in header */}
                                 </tr>
                             ))}
                         </tbody>
@@ -97,9 +119,9 @@ const Wallets = () => {
 
 const FilterContainer = styled.div`
     display: flex;
-    justify-content: space-between;  // Updated to space-between to move search to the right
-    width: 100%;  // Updated to align with the table width
-    margin: 20px auto 0;  // Center the container  
+    justify-content: space-between;  
+    width: 100%;  
+    margin: 20px auto 0;  
 `;
 
 const TableContainer = styled.div`
@@ -121,19 +143,31 @@ const TableContainer = styled.div`
 const StyledTable = styled.table`
     width: 90vw;
     border-collapse: collapse;
-    padding: 2vw;
-    
-`;
-
-const StyledTableCell = styled.td`
-    padding: 8px 12px;
-    text-align: left;
 `;
 
 const StyledTableHeader = styled.th`
-    padding: 8px 12px;
+    padding: 1.3rem 0 1.1rem 12px;
     text-align: left;
     background: #260C4F;
+    color: #F5F5F5;
+    font-family: Bell Centennial Std;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+`;
+
+const StyledTableCell = styled.td`
+    padding: 1.5rem 12px;
+    text-align: left;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &.name-column-cell {
+        font-size: 2rem; 
+    }
 `;
 
 const LoadingMessage = styled.div`
@@ -141,6 +175,26 @@ const LoadingMessage = styled.div`
     padding: 20px;
     font-size: 20px;
     font-weight: bold;
+`;
+
+const StyledSymbol = styled.span`
+    color: #3CE500;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+
+&.no-symbol {
+    color: #FF002E;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+    }
 `;
 
 export default Wallets;

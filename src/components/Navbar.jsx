@@ -31,11 +31,17 @@ const NavContainer = styled.div`
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
     backdrop-filter: blur(10px);
     margin-bottom: 5vw;
+    font-family: "Public Pixel";
+    font-size: 1.0625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
 `;
 
 const StyledLink = styled(Link)`
-    text-decoration: none;    
-    color: rgba(255, 255, 255, 0.80);  
+    text-decoration: none;   
+    color: rgba(255, 255, 255, 0.80);   
 `;
 
 const NavLinks = styled.div`
@@ -43,18 +49,13 @@ const NavLinks = styled.div`
     width: 100%;
     max-width: 59.625rem;
     justify-content: space-between;
-    font-size: 1.8rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
+    cursor: pointer;
 `;
 
 const ExternalLink = styled.a`
-    text-decoration: none;    
-    color: rgba(255, 255, 255, 0.80);  
+    text-decoration: none;      
     cursor: pointer;
-    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.80);
 `;
 
 const Logo = styled.img`

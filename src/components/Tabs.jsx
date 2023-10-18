@@ -25,6 +25,11 @@ const Tabs = ({ activeCategory, onCategoryChange }) => {
 const TabsContainer = styled.div`
     display: flex;
     align-items: center;
+    color: #F5F5F5;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 `;
 
 const Tab = styled.div`
