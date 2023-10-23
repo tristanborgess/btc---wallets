@@ -57,18 +57,32 @@ const SearchWallets = ({ onSearch, activeCategory, wallets, hasSearched, onClear
 const Container = styled.div`
     position: relative;
     width: fit-content;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    align-items: center;
 `;
 
 const Search = styled.div`
     position: relative;
+    display: flex;
+    padding-bottom: 0.5rem;
 `;
 
 const SearchInput = styled.input`
-    height: 30px;
+    width: 25.1875rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 2.5rem;
+    border: 2px solid #4000A8;
+    background: linear-gradient(140deg, rgba(26, 8, 54, 0.98) 14.07%, rgba(24, 3, 56, 0.44) 93.47%);
+    backdrop-filter: blur(40px);
     font-size: 18px;
-    padding-left: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding-left: 1.5rem;
+    color: #DEDEDE;
+    font-family: Bell Centennial Std;
+    font-size: 1.5rem;
+    padding-top: 0.3125rem;
 `;
 
 const SuggestionsList = styled.ul`
@@ -76,34 +90,37 @@ const SuggestionsList = styled.ul`
     top: 100%;
     left: 0;
     width: 100%;
-    max-height: 200px;
+    max-height: 30rem;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-top: none;
     border-radius: 0 0 5px 5px;
-    background-color: white;
     z-index: 10;
+    border-right: 1px solid rgba(199, 164, 255, 0.30);
+    border-bottom: 1px solid rgba(199, 164, 255, 0.30);
+    background: linear-gradient(140deg, rgba(26, 8, 54, 0.98) 14.07%, rgba(24, 3, 56, 0.44) 93.47%);
+    backdrop-filter: blur(25px);
 `;
 
 const SuggestionItem = styled.li`
-    padding: 10px;
+    padding: 1.3rem;
     cursor: pointer;
+    font-family: Bell Centennial Std;
+    font-size: 1.5625rem;
     &:hover {
-        background-color: #f2f2f2;
+        background-color: #01A097;
     }
 `;
 
 const ClearButton = styled.button`
-    margin-left: 20px;
-    background-color: red;
-    color: white;
+    background-color: transparent;
+    font-family: Bell Centennial Std;
+    font-size: 1.3rem;
+    height: 2.5rem;
+    color: #FF002E;
     border: none;
-    border-radius: 5px;
-    padding: 5px 15px;
+    border-radius: 3rem;
     cursor: pointer;
-    &:hover {
-        background-color: darkred;
-    }
 `;
 
 const Error = styled.p`
