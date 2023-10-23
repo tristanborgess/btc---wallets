@@ -56,7 +56,7 @@ const Wallets = () => {
 
         if (filteredWallets.length > 0) {
             const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category');
-            setShownColumns(['Name', ...walletFeatures.slice(1, 7)]);
+            setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
         }
     }, [activeCategory]);
 
@@ -83,20 +83,24 @@ const Wallets = () => {
                         <thead>
                             <tr>
                                 {shownColumns.map(feature => (
-                                    <StyledTableHeader key={feature}>
+                                    <StyledTableHeader 
+                                        key={feature}
+                                        className={feature === 'Name' ? 'name-column-cell' : ''}>
                                         {feature}
                                     </StyledTableHeader>
                                 ))}
                                 <StyledTableHeader>
+                                    <MoreContainer>
                                     <WalletFilter 
                                         columns={features} 
                                         shownColumns={shownColumns} 
                                         onColumnToggle={handleColumnToggle} 
                                     />
+                                    </MoreContainer>
                                 </StyledTableHeader>
                             </tr>
                         </thead>
-                        <tbody>
+                        <StyledTableBody>
                             {displayWallets.map(wallet => (
                                 <tr key={wallet._id}>
                                     {shownColumns.map(feature => (
@@ -109,7 +113,7 @@ const Wallets = () => {
                                     ))}
                                 </tr>
                             ))}
-                        </tbody>
+                        </StyledTableBody>
                     </StyledTable>
                 </TableContainer>
             )}
@@ -124,13 +128,18 @@ const FilterContainer = styled.div`
     margin: 20px auto 0;  
 `;
 
+const MoreContainer = styled.div`
+    margin-left: 1.5rem;
+`;
+
 const TableContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     padding: 0 2vw 2vw 2vw;
-    width: 90vw;
+    max-width: 78.75rem;
+    max-height: 41.8125rem; 
     border-right: 1px solid rgba(199, 164, 255, 0.30);
     border-bottom: 1px solid rgba(199, 164, 255, 0.30);
     background: linear-gradient(140deg, rgba(26, 8, 54, 0.98) 14.07%, rgba(24, 3, 56, 0.44) 93.47%);
@@ -141,8 +150,10 @@ const TableContainer = styled.div`
 `;
 
 const StyledTable = styled.table`
-    width: 90vw;
+    width: 100%;
     border-collapse: collapse;
+    overflow-x: auto;  // Added overflow-x for horizontal scroll
+    display: block;    // Added to make overflow properties effective
 `;
 
 const StyledTableHeader = styled.th`
@@ -155,6 +166,26 @@ const StyledTableHeader = styled.th`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    position: sticky;  // Added to freeze the header
+    top: 0;            // Aligns the header to the top of the table container
+    z-index: 1;        // Ensure headers appear above the table rows
+    min-width:150px;
+    width: 100%;
+
+    &.name-column-cell {
+        position: sticky;
+        left: 0;
+        z-index: 2; // Ensure it appears above other cells
+        background-color: #260C4F; // Same color as your header's background to ensure it’s not transparent
+    }
+`;
+
+const StyledTableBody = styled.tbody`
+    /* display: inline-block; */
+    max-height: 500px; // Adjust this value as per your requirement
+    overflow-y: auto;
+    width: 100%;
+    /* overflow-x: auto; */
 `;
 
 const StyledTableCell = styled.td`
@@ -164,9 +195,16 @@ const StyledTableCell = styled.td`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    min-width:150px;
 
     &.name-column-cell {
         font-size: 2rem; 
+        width:150px;
+        position: sticky;
+        left: 0;
+        z-index: 1; // Ensure it appears above other cells
+        background-color: #1a0837; // To cover the cells behind when scrolling
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     }
 `;
 
@@ -179,8 +217,8 @@ const LoadingMessage = styled.div`
 
 const StyledSymbol = styled.span`
     color: #3CE500;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 1.5rem;
+    font-family: SF Mono;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -188,8 +226,8 @@ const StyledSymbol = styled.span`
 
 &.no-symbol {
     color: #FF002E;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 1.5rem;
+    font-family: SF Mono;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;

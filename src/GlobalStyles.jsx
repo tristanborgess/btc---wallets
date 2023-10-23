@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         font-size: 100%;
         vertical-align: baseline;
+        overscroll-behavior: none;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure,
@@ -27,14 +28,14 @@ const GlobalStyles = createGlobalStyle`
         display: block;
     }
     #root {
-        max-width: 100vw;
+        width: 100%;
     }
     body {
         line-height: 1;
         font-family: "Bell Centennial Std";
         color: #F5F5F5;
         min-height: 100%;
-        max-width: 100%;
+        width: 100%;
         background-image: url(${bgImage});
         background-size: cover;
         background-position: center;

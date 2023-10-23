@@ -34,11 +34,10 @@ const Footer = () => {
 };
 
 const FooterContainer = styled.div`
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     padding: 1rem;
-    height: 188px;
-    width: 100%;
+    height: 11.75rem;
     align-items: center;
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
     backdrop-filter: blur(10px);
