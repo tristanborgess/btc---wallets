@@ -15,7 +15,7 @@ const WalletFilter = ({ columns, shownColumns, onColumnToggle }) => {
 
     return (
         <>
-            <FilterButton onClick={() => setIsOpen(!isOpen)}>+</FilterButton>
+            <FilterButton onClick={() => setIsOpen(!isOpen)}>Add +</FilterButton>
             {isOpen && (
                 <Dropdown>
                     <CheckboxContainer>
@@ -45,7 +45,12 @@ const FilterButton = styled.button`
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: white;  // Adjust the color to fit your design
+    color: #AE33D1;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-family:  Bell Centennial Std;
 `;
 
 const Dropdown = styled.div`
