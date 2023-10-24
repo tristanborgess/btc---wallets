@@ -125,7 +125,7 @@ const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;  
     width: 100%;  
-    margin: 20px auto 0;  
+    margin: 1.25rem auto 0;  
 `;
 
 const MoreContainer = styled.div`
@@ -147,6 +147,7 @@ const TableContainer = styled.div`
     backdrop-filter: blur(25px);
     margin-left: auto;
     margin-right: auto;
+    
 `;
 
 const StyledTable = styled.table`
@@ -154,6 +155,7 @@ const StyledTable = styled.table`
     border-collapse: collapse;
     overflow-x: auto;  // Added overflow-x for horizontal scroll
     display: block;    // Added to make overflow properties effective
+    
 `;
 
 const StyledTableHeader = styled.th`
@@ -171,6 +173,7 @@ const StyledTableHeader = styled.th`
     z-index: 1;        // Ensure headers appear above the table rows
     min-width:150px;
     width: 100%;
+    
 
     &.name-column-cell {
         position: sticky;
