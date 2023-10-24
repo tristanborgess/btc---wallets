@@ -43,7 +43,6 @@ const WalletFilter = ({ columns, shownColumns, onColumnToggle }) => {
 const FilterButton = styled.button`
     background: none;
     border: none;
-    font-size: 20px;
     cursor: pointer;
     color: #AE33D1;
     font-size: 1.5625rem;
@@ -55,14 +54,37 @@ const FilterButton = styled.button`
 
 const Dropdown = styled.div`
     position: absolute;
-    margin-top: 20px;
+    margin-top: 2.8rem;
     right: 0;
     background: linear-gradient(140deg, #1A0836 14.07%, rgba(24, 3, 56, 0.45) 93.47%);
-    border: 1px solid black;
+    max-height: 25rem;   // You can adjust this value as per your requirements
+    overflow-y: auto;    // Introduce vertical scrolling for overflowing content
+    width: 22rem;        // Optional: You can set a specific width if needed
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-family:  Bell Centennial Std;
+    align-items: center;
+
+    ::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #AE33D1;
+        border-radius: 0.125rem;
+    }
+    ::-webkit-scrollbar-track {
+        background: #1A0836;
+    }
 `;
 
 const CheckboxContainer = styled.div`
-    margin: 5px;
+    margin: 1rem;
+    align-items: baseline;
+    display: flex;
+    gap: 0.5rem;
+
 `;
 
 export default WalletFilter;
