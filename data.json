@@ -61,7 +61,9 @@
     "Latest Github Commit": "7/7/2020",
     "Responsible Disclosure Program": "Yes",
     "Latest Known Vulnerability": "-",
-    "Patched?": "-"
+    "Patched?": "-",
+    "Link": "https://bluewallet.io/",
+    "Logo": "src/assets/blueWallet.png"
   },
   {
     "_id": {
