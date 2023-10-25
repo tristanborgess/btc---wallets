@@ -4,15 +4,23 @@ import Tabs from './Tabs';
 import SearchWallets from './SearchWallets';
 import WalletFilter from './WalletFilter';
 import data from '/data.json';  // Ensure this path is correct
+import WalletModal from './WalletModal';
 
 const Wallets = () => {
     const [wallets, setWallets] = useState([]);
     const [activeCategory, setActiveCategory] = useState('On-chain');
     const [shownColumns, setShownColumns] = useState(['Name']);
     const [loading, setLoading] = useState(false);
-    const features = wallets.length > 0 ? Object.keys(wallets[0]).filter(feature => feature !== '_id' && feature !== 'Category') : [];
+    const features = wallets.length > 0 ? Object.keys(wallets[0]).filter(feature => feature !== '_id' && feature !== 'Category' && feature !== 'Link' && feature !== 'Logo') : [];
     const [displayAllWallets, setDisplayAllWallets] = useState(true);
     const [searchedWallets, setSearchedWallets] = useState([]);
+    const [selectedWallet, setSelectedWallet] = useState(null);
+    const openModal = (wallet) => {
+        setSelectedWallet(wallet);
+    };
+    const closeModal = () => {
+        setSelectedWallet(null);
+    };
 
     const handleSearch = (wallet) => {
         if (!searchedWallets.some(w => w._id === wallet._id)) {
@@ -55,7 +63,7 @@ const Wallets = () => {
         setWallets(filteredWallets);
 
         if (filteredWallets.length > 0) {
-            const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category');
+            const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category' && key !== 'Link' && key !== 'Logo');
             setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
         }
     }, [activeCategory]);
@@ -100,9 +108,10 @@ const Wallets = () => {
                                 </StyledTableHeader>
                             </tr>
                         </thead>
+                        {selectedWallet && <WalletModal wallet={selectedWallet} onClose={closeModal} />}
                         <StyledTableBody>
                             {displayWallets.map(wallet => (
-                                <tr key={wallet._id}>
+                                <StyledTableRow key={wallet._id} onClick={() => openModal(wallet)}>
                                     {shownColumns.map(feature => (
                                         <StyledTableCell 
                                             key={feature}
@@ -111,7 +120,7 @@ const Wallets = () => {
                                                 {mapYesNoToSymbols(wallet[feature])}
                                         </StyledTableCell>
                                     ))}
-                                </tr>
+                                </StyledTableRow>
                             ))}
                         </StyledTableBody>
                     </StyledTable>
@@ -173,7 +182,6 @@ const StyledTableHeader = styled.th`
     z-index: 1;        // Ensure headers appear above the table rows
     min-width:150px;
     width: 100%;
-    
 
     &.name-column-cell {
         position: sticky;
@@ -208,6 +216,12 @@ const StyledTableCell = styled.td`
         z-index: 1; // Ensure it appears above other cells
         background-color: #1a0837; // To cover the cells behind when scrolling
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+`;
+
+const StyledTableRow = styled.tr`
+    &:hover {
+        background-color: #01706a;  // Adjust color as per your theme
     }
 `;
 
