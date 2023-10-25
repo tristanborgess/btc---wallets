@@ -41,6 +41,10 @@ const NavContainer = styled.div`
 const StyledLink = styled(Link)`
     text-decoration: none;   
     color: rgba(255, 255, 255, 0.80);   
+
+    &:hover {
+        color: #8c4aff;
+    }
 `;
 
 const NavLinks = styled.div`
@@ -55,6 +59,10 @@ const ExternalLink = styled.a`
     text-decoration: none;      
     cursor: pointer;
     color: rgba(255, 255, 255, 0.80);
+
+    &:hover {
+        color: #8c4aff;
+    }
 `;
 
 const Logo = styled.img`

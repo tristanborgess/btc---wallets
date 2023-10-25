@@ -4,6 +4,9 @@ import GlobalStyles from './GlobalStyles';
 import Navbar from './components/Navbar';
 import Wallets from './components/Wallets';
 import Footer from './components/Footer';
+import Glossary from './components/Glossary';
+import About from './components/About';
+
 
 function App() {
 
@@ -11,9 +14,11 @@ function App() {
       <BrowserRouter>
       <GlobalStyles /> 
         <Navbar />
-        <Routes>
-          <Route path='/' element={<Wallets />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Wallets />} />
+            <Route path='/glossary' element={<Glossary />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
         <Footer />
       </BrowserRouter>
   );
