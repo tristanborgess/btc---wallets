@@ -41,9 +41,6 @@ const GlobalStyles = createGlobalStyle`
         background-position: center;
         background-repeat: no-repeat;
     }
-    ol, ul {
-        list-style: none;
-    }
     blockquote, q {
         quotes: none;
     }
