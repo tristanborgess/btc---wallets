@@ -61,6 +61,11 @@ const Container = styled.div`
     flex-direction: row-reverse;
     gap: 2rem;
     align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column; 
+        gap: 0;
+    }
 `;
 
 const Search = styled.div`
@@ -77,12 +82,18 @@ const SearchInput = styled.input`
     border: 2px solid #4000A8;
     background: linear-gradient(140deg, rgba(26, 8, 54, 0.98) 14.07%, rgba(24, 3, 56, 0.44) 93.47%);
     backdrop-filter: blur(40px);
-    font-size: 18px;
+    font-size: 1.125rem;
     padding-left: 1.5rem;
     color: #DEDEDE;
     font-family: Bell Centennial Std;
     font-size: 1.5rem;
     padding-top: 0.3125rem;
+
+    @media (max-width: 768px) {
+        width: 20rem;
+        font-size: 1.2rem;  
+        margin-bottom:0.5rem;
+    }
 `;
 
 const SuggestionsList = styled.ul`
@@ -92,7 +103,6 @@ const SuggestionsList = styled.ul`
     width: 100%;
     max-height: 30rem;
     overflow-y: auto;
-    /* border: 1px solid #ccc; */
     border-top: none;
     border-radius: 0 0 5px 5px;
     z-index: 10;
@@ -110,6 +120,9 @@ const SuggestionItem = styled.li`
     &:hover {
         background-color: #01A097;
     }
+    @media (max-width: 768px) {
+        font-size: 1.2rem;  
+    }
 `;
 
 const ClearButton = styled.button`
@@ -121,6 +134,11 @@ const ClearButton = styled.button`
     border: none;
     border-radius: 3rem;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+        font-size: 1.2rem;  
+        height: 2rem;
+    }
 `;
 
 const Error = styled.p`

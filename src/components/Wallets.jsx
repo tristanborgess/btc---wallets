@@ -51,36 +51,17 @@ const Wallets = () => {
             }
             return text;
     };
-
-    const [scrollIndex, setScrollIndex] = useState(0);
-    const handleScrollLeft = () => {
-        if (scrollIndex > 0) {
-            setScrollIndex(scrollIndex - 1);
-        }
-    };
-    const handleScrollRight = () => {
-        if (scrollIndex + 2 < features.length) {
-            setScrollIndex(scrollIndex + 1);
-        }
-    };
     
 
     useEffect(() => {
         const filteredWallets = data.filter(wallet => wallet.Category === activeCategory);
         setWallets(filteredWallets);
-    
+
         if (filteredWallets.length > 0) {
             const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category' && key !== 'Link' && key !== 'Logo');
-            
-            if (window.innerWidth <= 768) {
-                // When on mobile, show 'Name' column and two other columns based on scrollIndex.
-                setShownColumns(['Name', walletFeatures[scrollIndex], walletFeatures[scrollIndex + 1]]);
-            } else {
-                // On larger screens, show 'Name' and the next five columns.
-                setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
-            }
+            setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
         }
-    }, [activeCategory, scrollIndex]);
+    }, [activeCategory]);
     
     
 
@@ -178,6 +159,10 @@ const TableContainer = styled.div`
     backdrop-filter: blur(25px);
     margin-left: auto;
     margin-right: auto;
+
+    @media (max-width: 768px) {
+        max-width: 75rem;
+    }
     
 `;
 
@@ -218,11 +203,9 @@ const StyledTableHeader = styled.th`
 `;
 
 const StyledTableBody = styled.tbody`
-    /* display: inline-block; */
-    max-height: 500px; // Adjust this value as per your requirement
+    max-height: 31.25rem; 
     overflow-y: auto;
     width: 100%;
-    /* overflow-x: auto; */
 `;
 
 const StyledTableCell = styled.td`
@@ -257,6 +240,7 @@ const StyledTableCell = styled.td`
 const StyledTableRow = styled.tr`
     &:hover {
         background-color: #01706a;  // Adjust color as per your theme
+        cursor: pointer;
     }
 `;
 
