@@ -50,6 +50,10 @@ const FilterButton = styled.button`
     font-weight: 400;
     line-height: normal;
     font-family:  Bell Centennial Std;
+
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+    }
 `;
 
 const Dropdown = styled.div`
@@ -66,6 +70,7 @@ const Dropdown = styled.div`
     line-height: normal;
     font-family:  Bell Centennial Std;
     align-items: center;
+    z-index:1;
 
     ::-webkit-scrollbar {
         width: 0.5rem;
@@ -77,6 +82,11 @@ const Dropdown = styled.div`
     ::-webkit-scrollbar-track {
         background: #1A0836;
     }
+
+    @media (max-width: 768px) {
+        width: 15rem;
+        font-size: 1.1rem;
+    }
 `;
 
 const CheckboxContainer = styled.div`
@@ -84,6 +94,8 @@ const CheckboxContainer = styled.div`
     align-items: baseline;
     display: flex;
     gap: 0.5rem;
+    z-index:1;
+
 
 `;
 

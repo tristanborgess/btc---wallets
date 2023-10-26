@@ -21,52 +21,68 @@ const Wallets = () => {
     const closeModal = () => {
         setSelectedWallet(null);
     };
-
     const handleSearch = (wallet) => {
         if (!searchedWallets.some(w => w._id === wallet._id)) {
             setSearchedWallets(prevWallets => [...prevWallets, wallet]);
             setDisplayAllWallets(false);
         }
     };
-
     const handleClearSearch = () => {
         setSearchedWallets([]);
         setDisplayAllWallets(true);
     };
-
     const displayWallets = displayAllWallets ? wallets : searchedWallets;
-
     const handleColumnToggle = (newShownColumns) => {
         setShownColumns(newShownColumns);
     };
-
     const mapYesNoToSymbols = (text) => {
         if (text === "Yes") {
-          return (
-            <StyledSymbol className="yes-symbol" role="img" aria-label="Yes">
-              ✓
-            </StyledSymbol>
-          );
-        } else if (text === "No") {
-          return (
-            <StyledSymbol className="no-symbol" role="img" aria-label="No">
-              ✗
-            </StyledSymbol>
-          );
+            return (
+                <StyledSymbol className="yes-symbol" role="img" aria-label="Yes">
+                    ✓
+                </StyledSymbol>
+            );
+            } else if (text === "No") {
+                return (
+                    <StyledSymbol className="no-symbol" role="img" aria-label="No">
+                        ✗
+                    </StyledSymbol>
+                );
+            }
+            return text;
+    };
+
+    const [scrollIndex, setScrollIndex] = useState(0);
+    const handleScrollLeft = () => {
+        if (scrollIndex > 0) {
+            setScrollIndex(scrollIndex - 1);
         }
-        // Return the original text if it's neither "Yes" nor "No"
-        return text;
-      };
+    };
+    const handleScrollRight = () => {
+        if (scrollIndex + 2 < features.length) {
+            setScrollIndex(scrollIndex + 1);
+        }
+    };
+    
 
     useEffect(() => {
         const filteredWallets = data.filter(wallet => wallet.Category === activeCategory);
         setWallets(filteredWallets);
-
+    
         if (filteredWallets.length > 0) {
             const walletFeatures = Object.keys(filteredWallets[0]).filter(key => key !== '_id' && key !== 'Category' && key !== 'Link' && key !== 'Logo');
-            setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
+            
+            if (window.innerWidth <= 768) {
+                // When on mobile, show 'Name' column and two other columns based on scrollIndex.
+                setShownColumns(['Name', walletFeatures[scrollIndex], walletFeatures[scrollIndex + 1]]);
+            } else {
+                // On larger screens, show 'Name' and the next five columns.
+                setShownColumns(['Name', ...walletFeatures.slice(1, 6)]);
+            }
         }
-    }, [activeCategory]);
+    }, [activeCategory, scrollIndex]);
+    
+    
 
     return (
         <>
@@ -134,7 +150,13 @@ const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;  
     width: 100%;  
+    height: auto;
     margin: 1.25rem auto 0;  
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
 `;
 
 const MoreContainer = styled.div`
@@ -180,7 +202,7 @@ const StyledTableHeader = styled.th`
     position: sticky;  // Added to freeze the header
     top: 0;            // Aligns the header to the top of the table container
     z-index: 1;        // Ensure headers appear above the table rows
-    min-width:150px;
+    min-width:9rem;
     width: 100%;
 
     &.name-column-cell {
@@ -188,6 +210,10 @@ const StyledTableHeader = styled.th`
         left: 0;
         z-index: 2; // Ensure it appears above other cells
         background-color: #260C4F; // Same color as your header's background to ensure it’s not transparent
+    }
+
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
     }
 `;
 
@@ -206,16 +232,25 @@ const StyledTableCell = styled.td`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    min-width:150px;
+    min-width:9rem;
 
     &.name-column-cell {
         font-size: 2rem; 
-        width:150px;
+        width:9rem;
         position: sticky;
         left: 0;
         z-index: 1; // Ensure it appears above other cells
         background-color: #1a0837; // To cover the cells behind when scrolling
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        
+    }
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+
+        &.name-column-cell {
+            font-size: 1.5rem;
+        }
     }
 `;
 
@@ -230,6 +265,10 @@ const LoadingMessage = styled.div`
     padding: 20px;
     font-size: 20px;
     font-weight: bold;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
 `;
 
 const StyledSymbol = styled.span`
@@ -249,6 +288,14 @@ const StyledSymbol = styled.span`
     font-weight: 600;
     line-height: normal;
     text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+
+        &.no-symbol {
+            font-size: 1.5rem;
+        }
     }
 `;
 
