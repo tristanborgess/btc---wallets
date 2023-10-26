@@ -21,6 +21,9 @@ const GlobalStyles = createGlobalStyle`
         font-size: 100%;
         vertical-align: baseline;
         overscroll-behavior: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure,
