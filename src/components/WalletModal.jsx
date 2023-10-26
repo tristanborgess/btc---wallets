@@ -2,15 +2,51 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WalletModal = ({ wallet, onClose }) => {
+    const features = Object.keys(wallet).filter(feature => 
+        feature !== '_id' && feature !== 'Category' && 
+        feature !== 'Link' && feature !== 'Logo' &&
+        feature !== 'Name'
+    );
+
+    const mapYesNoToSymbols = (text) => {
+        if (text === "Yes") {
+          return (
+            <StyledSymbol className="yes-symbol" role="img" aria-label="Yes">
+              ✓
+            </StyledSymbol>
+          );
+        } else if (text === "No") {
+          return (
+            <StyledSymbol className="no-symbol" role="img" aria-label="No">
+              ✗
+            </StyledSymbol>
+          );
+        }
+        // Return the original text if it's neither "Yes" nor "No"
+        return text;
+      };
+
     return (
         <ModalBackground onClick={onClose}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
                 <CloseButton onClick={onClose}>X</CloseButton>
-                <LogoImage src={wallet.Logo} alt={wallet.Name + ' Logo'} />
+                <DataContainer>
                 <InfoContainer>
-                    <ModalTitle>{wallet.Name}</ModalTitle>
-                    <StyledLink href={wallet.Link} target="_blank" rel="noopener noreferrer">Visit Website</StyledLink>
+                    <LogoImage src={wallet.Logo} alt={wallet.Name + ' Logo'} />
+                        <div>
+                            <ModalTitle>{wallet.Name}</ModalTitle>
+                            <StyledLink href={wallet.Link} target="_blank" rel="noopener noreferrer">Visit Website</StyledLink>
+                        </div>
                 </InfoContainer>
+                    <ModalDetailsContainer>
+                        {features.map(feature => (
+                            <FeatureColumn key={feature}>
+                                <span>{feature}</span>
+                                <span>{mapYesNoToSymbols(wallet[feature])}</span>
+                            </FeatureColumn>
+                        ))}
+                    </ModalDetailsContainer>
+                </DataContainer>
             </ModalContent>
         </ModalBackground>
     );
@@ -36,13 +72,11 @@ const ModalContent = styled.div`
     box-shadow: 8px 8px 3px 0px rgba(199, 164, 255, 0.15);
     backdrop-filter: blur(25px);
     height: auto;
-    width: 25vw;
-    padding: 20px;
+    min-width: 25vw;
+    padding: 1.3rem;
     border-radius: 5px;
     position: relative;
-    display: flex;
-    gap: 2rem;
-    
+    margin-bottom: 10rem;
 `;
 
 const CloseButton = styled.button`
@@ -51,20 +85,24 @@ const CloseButton = styled.button`
     right: 10px;    
     background: transparent;
     border: none;
-    font-size: 1.2rem; 
+    font-size: 1rem; 
     cursor: pointer;
-    color: #FFF;    
+    color: rgba(255, 255, 255, 0.80);    
 `;
 
 const LogoImage = styled.img`
-    width: 10vw;     
-    height: auto;     
+    max-width: 3rem;     
+    max-height: 3rem;     
 `;
 
 const InfoContainer = styled.div`
     display: flex;
-    flex-direction: column;
     gap: 1rem;
+`;
+
+const DataContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const StyledLink = styled.a`
@@ -83,6 +121,45 @@ const ModalTitle = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+`;
+
+const ModalDetailsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 25rem;
+    overflow-y: auto;
+    border-top: 1px solid rgba(199, 164, 255, 0.30);
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+`;
+
+const FeatureColumn = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+`;
+
+const StyledSymbol = styled.span`
+    color: #3CE500;
+    font-family: SF Mono;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+
+&.no-symbol {
+    color: #FF002E;
+    font-family: SF Mono;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    }
 `;
 
 export default WalletModal;
