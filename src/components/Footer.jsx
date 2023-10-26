@@ -24,7 +24,7 @@ const Footer = () => {
                     <CreditLink href="https://twitter.com/TristanBorgess" target="_blank" rel="noopener noreferrer">
                         Twitter
                     </CreditLink>
-                    <CreditLink href="https://twitter.com/TristanBorgess" target="_blank" rel="noopener noreferrer">
+                    <CreditLink href="https://btcpay.davidcoen.it/api/v1/invoices?storeId=CAkQjcgKrVv8QCRHypYQoVyaBDJE6YUhCF3Gb9u394wR&currency=USD" target="_blank" rel="noopener noreferrer">
                         Donate
                     </CreditLink>
                 </LinksContainer>
@@ -89,7 +89,12 @@ const CreditsContainer = styled.p`
     font-weight: 100;
     line-height: normal;
     margin-top: 2.13rem;
-    width: 29.375rem;
+    max-width: 29.375rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+        font-size: 0.4rem;
+    }
 `;
 
 const LinksContainer = styled.div`
