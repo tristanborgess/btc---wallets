@@ -16,7 +16,7 @@ const Footer = () => {
                     GitHub
                 </ExternalLink>
             </NavLinks>
-            <CreditsContainer>Designed, created and maintained by Tristan Borges Solari.
+            <CreditsContainer>Created by Tristan Borges Solari.
                 <LinksContainer>
                     <CreditLink href="https://github.com/tristanborgess" target="_blank" rel="noopener noreferrer">
                         GitHub
@@ -83,8 +83,8 @@ const CreditsContainer = styled.p`
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: rgba(255, 255, 255, 0.80);
-    font-size: 0.5rem;
+    color: #B4B1C0;
+    font-size: 0.7rem;
     font-style: normal;
     font-weight: 100;
     line-height: normal;
@@ -93,7 +93,7 @@ const CreditsContainer = styled.p`
     text-align: center;
 
     @media (max-width: 768px) {
-        font-size: 0.4rem;
+        font-size: 0.6rem;
     }
 `;
 
@@ -106,7 +106,7 @@ const LinksContainer = styled.div`
 
 const CreditLink = styled.a`
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.80);
+    color: #B4B1C0;
 `;
 
 export default Footer;
