@@ -3264,4 +3264,31 @@
     "Multi Party Payment": "No",
     "Latest Release Version": "0.2.2",
     "Latest Release Date": "5/9/2020"
-}]
+},
+{
+  "_id": {
+    "$oid": "6jf812bd4feb52a70295c747"
+  },
+  "Name": "COLDCARD Mk.4",
+  "Category": "Hardware",
+  "Web App": "No",
+  "Desktop App": "No",
+  "Mobile App": "No",
+  "Software Language": "Javascript",
+  "Fully Open Source": "No",
+  "Testnet": "No",
+  "Connects to external server": "No",
+  "Airgap possible": "Yes",
+  "Bech32": "Yes",
+  "P2SH Wrapped": "Yes",
+  "Support Channel": "Email",
+  "Legal Policy": "Yes",
+  "Merchant Connection": "No",
+  "Locking mechanism": "PIN code",
+  "Backup Forced": "Yes",
+  "LN support": "No",
+  "Fiat Exchange": "No",
+  "Latest Release Version": "-",
+  "Latest Release Date": "-"
+}
+]
